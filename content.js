@@ -26,6 +26,16 @@ function restoreNormal() {
     videoElement.muted = false;
   }
 }
+function getAdDuration() {
+  const adDurationElement = document.querySelector('.ytp-time-duration');
+  console.log(adDurationElement)
+  if (adDurationElement) {
+    //console.log("time:", adDurationElement.textContent)
+    const [minutes, seconds] = adDurationElement.textContent.trim().split(':').map(Number);
+    return minutes * 60 + seconds -1; //acceleration takes 1 sec
+  }
+  return 0;
+}
 
 const checkInterval = 1000; // every 1000ms, a check will occur
 
@@ -56,9 +66,12 @@ const adSkipChecker = setInterval(() => {
 
       if (skipButton) {
         clickSkipAdButton();
+        chrome.runtime.sendMessage({ action: "updateTimeSaved", timeSaved: 5 });
         wasAdPlaying = true;
+
       } else if (adCurrentlyPlaying || isAdUnskippable()) {
         accelerate();
+        chrome.runtime.sendMessage({ action: "updateTimeSaved", timeSaved: getAdDuration() });
         wasAdPlaying = true;
       } else if (wasAdPlaying && !adCurrentlyPlaying) {
         restoreNormal();

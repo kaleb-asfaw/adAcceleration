@@ -4,6 +4,9 @@
   "version": "2.0.3", 
   "description": "Extension which skips both 5-second skippable and unskippable ads",
   "permissions": ["tabs", "storage"], 
+  "background":{
+    "service_worker": "background.js"
+  },
   "content_scripts": [
     {
       "matches": ["https://*.youtube.com/*"],
