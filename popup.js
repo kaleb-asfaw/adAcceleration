@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
           const totalTimeSaved = result.totalTimeSaved || 0;
           // Update the text content of the element where you want to display the time
           // Replace 'timeSavedDisplay' with the actual ID of your display element
-          document.getElementById("timeSavedDisplay").textContent = `Total Time Saved: ${totalTimeSaved} seconds`;
+          document.getElementById("timeSavedDisplay").textContent = `Time Saved: ${totalTimeSaved} seconds`;
       });
   }
 
