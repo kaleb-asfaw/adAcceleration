@@ -71,7 +71,7 @@ const adSkipChecker = setInterval(() => {
 
       } else if (adCurrentlyPlaying || isAdUnskippable()) {
         accelerate();
-        chrome.runtime.sendMessage({ action: "updateTimeSaved", timeSaved: getAdDuration() });
+        chrome.runtime.sendMessage({ action: "updateTimeSaved", timeSaved: getAdDuration()});
         wasAdPlaying = true;
       } else if (wasAdPlaying && !adCurrentlyPlaying) {
         restoreNormal();
