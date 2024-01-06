@@ -1,4 +1,6 @@
 let wasAdPlaying = false;
+let originalPlaybackRate = 1;
+const checkInterval = 1000; // every 1000ms, a check will occur
 
 function isAdUnskippable() {
   return !!document.querySelector(".ytp-ad-preview, .ytp-ad-preview-slot");
@@ -10,6 +12,12 @@ function clickSkipAdButton() {
     skipButton.click();
   }
 }
+function updatePlaybackRate() {
+  const videoElement = document.querySelector('video');
+  if (videoElement) {
+    originalPlaybackRate = videoElement.playbackRate;
+  }
+}
 
 function accelerate() {
   const videoElement = document.querySelector('video');
@@ -19,16 +27,17 @@ function accelerate() {
   }
 }
 
-function restoreNormal() {
+function restoreNormal(rate) {
   const videoElement = document.querySelector('video');
   if (videoElement) {
-    videoElement.playbackRate = 1;
+    videoElement.playbackRate = rate;
     videoElement.muted = false;
   }
 }
+
 function getAdDuration() {
   const adDurationElement = document.querySelector('.ytp-time-duration');
-  console.log(adDurationElement)
+  //console.log(adDurationElement)
   if (adDurationElement) {
     //console.log("time:", adDurationElement.textContent)
     const [minutes, seconds] = adDurationElement.textContent.trim().split(':').map(Number);
@@ -37,7 +46,6 @@ function getAdDuration() {
   return 0;
 }
 
-const checkInterval = 1000; // every 1000ms, a check will occur
 
 function isAdPlaying() {
   return !!document.querySelector('.ytp-ad-preview, .ytp-ad-preview-slot');
@@ -58,12 +66,19 @@ function getAdSkipperState(callback) {
 
 // Periodically check the ad skipper state
 const adSkipChecker = setInterval(() => {
+  const adCurrentlyPlaying = isAdPlaying();
+  const videoElement = document.querySelector('video');
+
+  if (videoElement && !adCurrentlyPlaying){
+    updatePlaybackRate() // Dynamically adjusting the value of originalPlaybackRate
+  }
+  
   // Retrieve the ad skipper state and use it to decide whether to skip ads
   getAdSkipperState((isAdSkipperEnabled) => {
     if (isAdSkipperEnabled) {
       const skipButton = document.querySelector(".ytp-ad-skip-button, .ytp-ad-overlay-close-button, .ytp-ad-skip-button-slot");
-      const adCurrentlyPlaying = isAdPlaying();
-
+      
+  
       if (skipButton) {
         clickSkipAdButton();
         chrome.runtime.sendMessage({ action: "updateTimeSaved", timeSaved: 5 });
@@ -73,8 +88,9 @@ const adSkipChecker = setInterval(() => {
         accelerate();
         chrome.runtime.sendMessage({ action: "updateTimeSaved", timeSaved: getAdDuration()});
         wasAdPlaying = true;
+
       } else if (wasAdPlaying && !adCurrentlyPlaying) {
-        restoreNormal();
+        restoreNormal(originalPlaybackRate);
         wasAdPlaying = false;
       }
     }
