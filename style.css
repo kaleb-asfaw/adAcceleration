@@ -1,0 +1,133 @@
+/* style.css */
+
+/* Center the content vertically and horizontally */
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 125px;
+  width: 200px;
+  border-radius: 20px;
+  margin: 0;
+  font-family: Garamond, serif;
+  color: black;
+  background:rgb(47, 42, 42);
+  position: relative; /* Added to support absolute positioning of header */
+}
+/* Header styles */
+.header {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%; /* Make header full width */
+  margin-top: 10px;
+}
+
+
+/* Menu image */
+.menu-image {
+  width: 30px; /* Adjust as needed */
+  height: 24.5px; /* Adjust as needed */
+  margin-right: 5px;
+  position: absolute;
+  top: -2px; /* Adjust as needed */
+  right: 5px; /* Adjust for right alignment */
+}
+
+.subnav-item {
+  position: relative; /* Needed for absolute positioning of the tooltip */
+}
+
+.tooltip {
+  visibility: hidden;
+  width: 120px; /* Adjust width as necessary */
+  background-color: white;
+  color: black;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  top: 50%; /* Vertically center relative to the icon */
+  left: 100%; /* Position to the right, close to the icon */
+  transform: translateY(-50%); /* Adjust vertical alignment */
+  transition: visibility 0.2s, opacity 0.2s linear;
+}
+
+
+.title {
+  margin: 0;
+  margin-left: 10px;
+  font-size: 18px;
+  color: rgb(232, 232, 232)
+}
+
+.time-saved-display{
+  margin-top: 10px;
+  font-size: 14px;
+  color: rgb(232, 232, 232)
+}
+
+/* Toggle switch styles */
+.toggle-switch {
+  display: flex;
+  align-items: center;
+  font-size: 18px;
+  margin-top: 30px
+}
+
+.switch-label {
+  margin-right: 10px; /* Add some spacing between the label and switch */
+  pointer-events: none;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px; /* Adjust the width as needed */
+  height: 24px; /* Adjust the height as needed */
+}
+
+.switch input {
+  display: none;
+}
+
+.slider-round {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+  border-radius: 24px; /* Adjust the border-radius to match the height */
+}
+
+.slider-round:before {
+  position: absolute;
+  content: "";
+  height: 20px; /* Adjust the height as needed */
+  width: 20px; /* Adjust the width as needed */
+  left: 2px; /* Adjust the left position as needed */
+  bottom: 2px; /* Adjust the bottom position as needed */
+  background-color: rgb(232, 232, 232);
+  -webkit-transition: .4s;
+  transition: .4s;
+  border-radius: 50%;
+}
+
+/* Move the slider to the right when checked */
+input:checked + .slider-round {
+  background-color: #db1d1d;
+}
+
+input:checked + .slider-round:before {
+  -webkit-transform: translateX(24px); /* Adjust the translation distance */
+  -ms-transform: translateX(24px); /* Adjust the translation distance */
+  transform: translateX(24px); /* Adjust the translation distance */
+}

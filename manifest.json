@@ -1,0 +1,24 @@
+{
+  "manifest_version": 3,
+  "name": "Auto Skip Ads (DEPLOYED)",
+  "version": "3.0.0", 
+  "description": "YouTube premium on a budget :)",
+  "permissions": ["tabs", "storage"], 
+  "background":{
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://*.youtube.com/*"],
+      "js": ["content.js"]
+    }
+  ],
+  "action":{
+    "default_popup": "popup.html"
+  },
+  "icons":{
+    "16": "images/togo.png",
+    "48": "images/togo.png",
+    "128": "images/togo.png"
+  }
+}
