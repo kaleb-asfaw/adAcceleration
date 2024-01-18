@@ -6,9 +6,9 @@ With Neal Mohan's instatement as Youtube's CEO began Google's ad-blocker blockin
 ✓ Automatically bypasses skippable ads  
 ✓ Mutes and accelerates unskippable ads  
 ✓ Can enable/disable functionality at any time (via extension popup)  
-✓ Tracks user analytics: user can view number of minutes saved through using Ad Accelerate (via extension popup)  
+✓ Tracks user analytics: user can view number of minutes saved (via extension popup)  
 ✓ Result: cut ad times by over 95%!
 
 # Feedback
 
-If you have any suggestions or bugs, please contact us at ____@gmail.com  
+If you have any suggestions or bugs, please contact us at adAcceleration@gmail.com  
