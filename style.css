@@ -1,7 +1,4 @@
-/* style.css */
-
-/* Center the content vertically and horizontally */
-body {
+body { /* Popup styling */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -13,65 +10,42 @@ body {
   font-family: Garamond, serif;
   color: black;
   background:rgb(47, 42, 42);
-  position: relative; /* Added to support absolute positioning of header */
+  position: relative;
 }
-/* Header styles */
-.header {
+
+.header { /* Title + logo spacing */ 
   display: flex;
   align-items: center;
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%; /* Make header full width */
+  width: 100%; 
   margin-top: 10px;
 }
 
-
-/* Menu image */
-.menu-image {
-  width: 30px; /* Adjust as needed */
-  height: 24.5px; /* Adjust as needed */
+.menu-image { /* Logo */
+  width: 30px;
+  height: 24.5px;
   margin-right: 5px;
   position: absolute;
-  top: -2px; /* Adjust as needed */
-  right: 5px; /* Adjust for right alignment */
+  top: -2px;
+  right: 5px;
 }
 
-.subnav-item {
-  position: relative; /* Needed for absolute positioning of the tooltip */
-}
-
-.tooltip {
-  visibility: hidden;
-  width: 120px; /* Adjust width as necessary */
-  background-color: white;
-  color: black;
-  text-align: center;
-  border-radius: 6px;
-  padding: 5px 0;
-  position: absolute;
-  z-index: 1;
-  top: 50%; /* Vertically center relative to the icon */
-  left: 100%; /* Position to the right, close to the icon */
-  transform: translateY(-50%); /* Adjust vertical alignment */
-  transition: visibility 0.2s, opacity 0.2s linear;
-}
-
-
-.title {
+.title { /* Title */
   margin: 0;
   margin-left: 10px;
   font-size: 18px;
   color: rgb(232, 232, 232)
 }
 
-.time-saved-display{
+.time-saved-display{ /* Over _ minutes saved! */
   margin-top: 10px;
   font-size: 14px;
   color: rgb(232, 232, 232)
 }
 
-/* Toggle switch styles */
+/* Styling for the switch */
 .toggle-switch {
   display: flex;
   align-items: center;
@@ -80,22 +54,22 @@ body {
 }
 
 .switch-label {
-  margin-right: 10px; /* Add some spacing between the label and switch */
+  margin-right: 10px;
   pointer-events: none;
 }
 
 .switch {
   position: relative;
   display: inline-block;
-  width: 50px; /* Adjust the width as needed */
-  height: 24px; /* Adjust the height as needed */
+  width: 50px;
+  height: 24px;
 }
 
 .switch input {
   display: none;
 }
 
-.slider-round {
+.slider-round { /* Slider graphic */
   position: absolute;
   cursor: pointer;
   top: 0;
@@ -105,16 +79,16 @@ body {
   background-color: #ccc;
   -webkit-transition: .4s;
   transition: .4s;
-  border-radius: 24px; /* Adjust the border-radius to match the height */
+  border-radius: 24px;
 }
 
 .slider-round:before {
   position: absolute;
   content: "";
-  height: 20px; /* Adjust the height as needed */
-  width: 20px; /* Adjust the width as needed */
-  left: 2px; /* Adjust the left position as needed */
-  bottom: 2px; /* Adjust the bottom position as needed */
+  height: 20px;
+  width: 20px;
+  left: 2px;
+  bottom: 2px;
   background-color: rgb(232, 232, 232);
   -webkit-transition: .4s;
   transition: .4s;
@@ -127,7 +101,7 @@ input:checked + .slider-round {
 }
 
 input:checked + .slider-round:before {
-  -webkit-transform: translateX(24px); /* Adjust the translation distance */
-  -ms-transform: translateX(24px); /* Adjust the translation distance */
-  transform: translateX(24px); /* Adjust the translation distance */
+  -webkit-transform: translateX(24px);
+  -ms-transform: translateX(24px);
+  transform: translateX(24px);
 }
