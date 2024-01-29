@@ -11,4 +11,4 @@ With Neal Mohan's instatement as Youtube's CEO began Google's ad-blocker blockin
 
 # Feedback
 
-If you have any suggestions or bugs, please contact us at adAcceleration@gmail.com  nig
+If you have any suggestions or bugs, please contact us at adAcceleration@gmail.com  niga
