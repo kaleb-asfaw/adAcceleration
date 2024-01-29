@@ -13,16 +13,23 @@ document.addEventListener("DOMContentLoaded", function () {
         chrome.storage.local.set({ "adSkipperEnabled": isChecked });
       });
     });
-  
-    // Function to update the display of total time saved
-    function updateTimeSavedDisplay() {
-        chrome.storage.local.get("totalTimeSaved", (result) => {
-            const totalTimeSaved = result.totalTimeSaved || 0;
-            // Update the text content of the element where you want to display the time
-            // Replace 'timeSavedDisplay' with the actual ID of your display element
-            document.getElementById("timeSavedDisplay").textContent = `1Time Saved: ${totalTimeSaved} seconds`;
-        });
-    }
-    // Call this function to update the display when the popup is opened
-    updateTimeSavedDisplay();
+    function updateTimeSavedTooltip() {
+      chrome.storage.local.get("totalTimeSaved", (result) => {
+          const totalTimeSaved = result.totalTimeSaved || 0;
+          // Sending floor of minutes saved
+          let displayMessage;
+
+          if (totalTimeSaved < 60) {
+            displayMessage = 'Less than a minute saved';
+          }
+          else if (totalTimeSaved < 120) {
+            displayMessage = 'You have saved 1 minute'
+          }
+          else{
+            displayMessage = `Over ${Math.floor(totalTimeSaved/60)} minutes saved!`;
+          }
+          document.getElementById("displayMessage").textContent = displayMessage
+      });
+  }
+  updateTimeSavedTooltip(); // Call this function to update the tooltip when the popup is opened
   });  

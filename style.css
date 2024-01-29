@@ -1,47 +1,75 @@
-/* style.css */
-
-/* Center the content vertically and horizontally */
-body {
+body { /* Popup styling */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 250px;
-  width: 350px;
+  height: 125px;
+  width: 200px;
+  border-radius: 20px;
   margin: 0;
   font-family: Garamond, serif;
-  color: #FFFFFF;
-  background: linear-gradient(112.1deg, rgb(32, 38, 57) 11.4%, rgb(63, 76, 119) 70.2%);
+  color: black;
+  background:rgb(47, 42, 42);
+  position: relative;
 }
 
-h1 {
-  font-size: 24px;
-  margin-bottom: 20px;
+.header { /* Title + logo spacing */ 
+  display: flex;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%; 
+  margin-top: 10px;
 }
 
+.menu-image { /* Logo */
+  width: 30px;
+  height: 24.5px;
+  margin-right: 5px;
+  position: absolute;
+  top: -2px;
+  right: 5px;
+}
+
+.title { /* Title */
+  margin: 0;
+  margin-left: 10px;
+  font-size: 18px;
+  color: rgb(232, 232, 232)
+}
+
+.time-saved-display{ /* Over _ minutes saved! */
+  margin-top: 10px;
+  font-size: 14px;
+  color: rgb(232, 232, 232)
+}
+
+/* Styling for the switch */
 .toggle-switch {
   display: flex;
   align-items: center;
   font-size: 18px;
+  margin-top: 30px
 }
 
 .switch-label {
-  margin-right: 10px; /* Add some spacing between the label and switch */
-  pointer-events:  none;
+  margin-right: 10px;
+  pointer-events: none;
 }
 
 .switch {
   position: relative;
   display: inline-block;
-  width: 50px; /* Adjust the width as needed */
-  height: 24px; /* Adjust the height as needed */
+  width: 50px;
+  height: 24px;
 }
 
 .switch input {
   display: none;
 }
 
-.slider-round {
+.slider-round { /* Slider graphic */
   position: absolute;
   cursor: pointer;
   top: 0;
@@ -51,17 +79,17 @@ h1 {
   background-color: #ccc;
   -webkit-transition: .4s;
   transition: .4s;
-  border-radius: 24px; /* Adjust the border-radius to match the height */
+  border-radius: 24px;
 }
 
 .slider-round:before {
   position: absolute;
   content: "";
-  height: 20px; /* Adjust the height as needed */
-  width: 20px; /* Adjust the width as needed */
-  left: 2px; /* Adjust the left position as needed */
-  bottom: 2px; /* Adjust the bottom position as needed */
-  background-color: white;
+  height: 20px;
+  width: 20px;
+  left: 2px;
+  bottom: 2px;
+  background-color: rgb(232, 232, 232);
   -webkit-transition: .4s;
   transition: .4s;
   border-radius: 50%;
@@ -69,11 +97,11 @@ h1 {
 
 /* Move the slider to the right when checked */
 input:checked + .slider-round {
-  background-color: #2196F3;
+  background-color: #db1d1d;
 }
 
 input:checked + .slider-round:before {
-  -webkit-transform: translateX(24px); /* Adjust the translation distance */
-  -ms-transform: translateX(24px); /* Adjust the translation distance */
-  transform: translateX(24px); /* Adjust the translation distance */
+  -webkit-transform: translateX(24px);
+  -ms-transform: translateX(24px);
+  transform: translateX(24px);
 }

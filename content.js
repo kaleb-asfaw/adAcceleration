@@ -1,6 +1,7 @@
 let wasAdPlaying = false;
 let originalPlaybackRate = 1;
-const checkInterval = 1000; // every 1000ms, a check will occur
+
+const checkInterval = 1000; // every 1000ms, a check will occur (this can be more frequent, may cause laggy browser)
 
 function isAdUnskippable() {
   return !!document.querySelector(".ytp-ad-preview, .ytp-ad-preview-slot");
@@ -31,7 +32,6 @@ function restoreNormal(rate) {
   const videoElement = document.querySelector('video');
   if (videoElement) {
     videoElement.playbackRate = rate;
-    videoElement.muted = false;
   }
 }
 
@@ -77,9 +77,8 @@ const adSkipChecker = setInterval(() => {
   getAdSkipperState((isAdSkipperEnabled) => {
     if (isAdSkipperEnabled) {
       const skipButton = document.querySelector(".ytp-ad-skip-button, .ytp-ad-overlay-close-button, .ytp-ad-skip-button-slot");
-      
   
-      if (skipButton) {
+      if (skipButton) { 
         clickSkipAdButton();
         chrome.runtime.sendMessage({ action: "updateTimeSaved", timeSaved: 5 });
         wasAdPlaying = true;
@@ -92,6 +91,10 @@ const adSkipChecker = setInterval(() => {
       } else if (wasAdPlaying && !adCurrentlyPlaying) {
         restoreNormal(originalPlaybackRate);
         wasAdPlaying = false;
+      } else{ // Bug fix version 1.0.2 (if video continues at x15, this should catch it)
+        if (videoElement.playbackRate > 2){
+          restoreNormal(originalPlaybackRate)
+        }
       }
     }
   });
