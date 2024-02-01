@@ -3,8 +3,8 @@ body { /* Popup styling */
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 125px;
-  width: 200px;
+  height: 150px;
+  width: 240px;
   border-radius: 20px;
   margin: 0;
   font-family: Garamond, serif;
@@ -104,4 +104,20 @@ input:checked + .slider-round:before {
   -webkit-transform: translateX(24px);
   -ms-transform: translateX(24px);
   transform: translateX(24px);
+}
+
+/* Reset button styling */
+.reset-button {
+  border: none;
+  color: black;
+  padding: 4px 8px; /* Adjust padding to control the size */
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px; /* Adjust font size as needed */
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 12px; /* Rounded corners */
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); /* Optional: Adds a shadow */
+  transition-duration: 0.4s; /* Optional: Adds a transition effect */
 }

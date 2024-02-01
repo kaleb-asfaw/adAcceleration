@@ -1,6 +1,21 @@
 document.addEventListener("DOMContentLoaded", function () {
     const toggleSwitch = document.getElementById("toggleSwitch");
-  
+    const resetButton = document.getElementById("resetButton");
+    const resetDateDisplay = document.getElementById("resetDateDisplay");
+
+    resetButton.addEventListener('click', function () {
+      const newResetDate = new Date().toISOString();
+      chrome.storage.local.set({ "timeSavedSinceReset": 0, "lastResetDate": newResetDate }, () => {
+          if (chrome.runtime.lastError) {
+              console.error('Error updating storage:', chrome.runtime.lastError);
+          } else {
+              // Data has been successfully updated, now refresh the UI
+              resetDateDisplay.textContent = `Time Saved Since (${new Date(newResetDate).toLocaleDateString()}): 0 seconds saved`;
+              updateTimeSavedTooltip();
+          }
+      });
+  });
+
     // Retrieve the ad skipper state from Chrome storage and set the toggle switch accordingly
     chrome.storage.local.get("adSkipperEnabled", (result) => {
       const isAdSkipperEnabled = result.adSkipperEnabled !== undefined ? result.adSkipperEnabled : true;
@@ -13,9 +28,22 @@ document.addEventListener("DOMContentLoaded", function () {
         chrome.storage.local.set({ "adSkipperEnabled": isChecked });
       });
     });
+    
+    function formatTime(timeInSeconds) {
+      if (timeInSeconds < 60) {
+          return 'Less than a minute';
+      } else if (timeInSeconds < 120) {
+          return '1 minute';
+      } else {
+          return `Over ${Math.floor(timeInSeconds / 60)} minutes!`;
+      }
+  }
+    
     function updateTimeSavedTooltip() {
-      chrome.storage.local.get("totalTimeSaved", (result) => {
+      chrome.storage.local.get(["totalTimeSaved", "timeSavedSinceReset", "lastResetDate"], (result) => {
           const totalTimeSaved = result.totalTimeSaved || 0;
+          const timeSavedSinceReset = result.timeSavedSinceReset || 0;
+          const lastResetDate = new Date(result.lastResetDate || new Date()).toLocaleDateString();
           // Sending floor of minutes saved
           let displayMessage;
 
@@ -28,7 +56,8 @@ document.addEventListener("DOMContentLoaded", function () {
           else{
             displayMessage = `Over ${Math.floor(totalTimeSaved/60)} minutes saved!`;
           }
-          document.getElementById("displayMessage").textContent = displayMessage
+          document.getElementById("displayMessage").textContent = totalTimeSaved
+          resetDateDisplay.textContent = `Time Saved Since(${lastResetDate}): ${timeSavedSinceReset}`;
       });
   }
   updateTimeSavedTooltip(); // Call this function to update the tooltip when the popup is opened
