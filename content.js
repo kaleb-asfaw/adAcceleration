@@ -3,10 +3,6 @@ let originalPlaybackRate = 1;
 
 const checkInterval = 1000; // every 1000ms, a check will occur
 
-function isAdUnskippable() {
-  return !!document.querySelector(".ytp-ad-preview, .ytp-ad-preview-slot");
-}
-
 function clickSkipAdButton() {
   const skipButton = document.querySelector(".ytp-ad-skip-button, .ytp-ad-overlay-close-button, .ytp-ad-skip-button-slot");
   if (skipButton) {
@@ -83,7 +79,7 @@ const adSkipChecker = setInterval(() => {
         chrome.runtime.sendMessage({ action: "updateTimeSaved", timeSaved: 5 });
         wasAdPlaying = true;
 
-      } else if (adCurrentlyPlaying || isAdUnskippable()) {
+      } else if (adCurrentlyPlaying) {
         accelerate();
         chrome.runtime.sendMessage({ action: "updateTimeSaved", timeSaved: getAdDuration()});
         wasAdPlaying = true;
