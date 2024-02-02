@@ -3,6 +3,10 @@ let originalPlaybackRate = 1;
 
 const checkInterval = 1000; // every 1000ms, a check will occur (this can be more frequent, may cause laggy browser)
 
+function isAdPlaying() {
+  return !!document.querySelector('.ytp-ad-preview, .ytp-ad-preview-slot');}
+const L = 3;
+
 function accelerate() {
   const videoElement = document.querySelector('video');
   if (videoElement) {
@@ -22,12 +26,7 @@ function getAdDuration() {
     const [minutes, seconds] = adDurationElement.textContent.trim().split(':').map(Number);
     return minutes * 60 + seconds -1; //acceleration takes 1 sec
   }
-  return 0;
-}
-
-function isAdPlaying() {
-  return !!document.querySelector('.ytp-ad-preview, .ytp-ad-preview-slot');
-}
+  return 0;}
 
 // Retrieve the ad skipper state, and handle errors gracefully
 function getAdSkipperState(callback) {
