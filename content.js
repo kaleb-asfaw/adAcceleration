@@ -6,7 +6,7 @@ const checkInterval = 1000; // every 1000ms, a check will occur (this can be mor
 function isAdUnskippable() {
   return !!document.querySelector(".ytp-ad-preview, .ytp-ad-preview-slot");
 }
-
+const L = 3;
 function clickSkipAdButton() {
   const skipButton = document.querySelector(".ytp-ad-skip-button, .ytp-ad-overlay-close-button, .ytp-ad-skip-button-slot");
   if (skipButton) {
