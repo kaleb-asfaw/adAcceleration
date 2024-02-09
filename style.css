@@ -3,8 +3,8 @@ body { /* Popup styling */
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 150px;
-  width: 240px;
+  height: 125px;
+  width: 200px;
   border-radius: 20px;
   margin: 0;
   font-family: Garamond, serif;
@@ -41,7 +41,7 @@ body { /* Popup styling */
 
 .time-saved-display{ /* Over _ minutes saved! */
   margin-top: 10px;
-  font-size: 14px;
+  font-size: 9px;
   color: rgb(232, 232, 232)
 }
 
@@ -106,15 +106,25 @@ input:checked + .slider-round:before {
   transform: translateX(24px);
 }
 
+/* Scrolling from lifetime to <from date> statistics */
+.arrow {
+  cursor: pointer;
+  display: inline-block;
+  transform: rotate(-90deg) translateX(.5px)translateY(5px); /* Rotate 90 degrees counterclockwise */
+  font-size: 8px;
+  
+  
+}
+
 /* Reset button styling */
 .reset-button {
   border: none;
   color: black;
-  padding: 4px 8px; /* Adjust padding to control the size */
+  padding: 2px 4px; /* Adjust padding to control the size */
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 16px; /* Adjust font size as needed */
+  font-size: 8px; /* Adjust font size as needed */
   margin: 4px 2px;
   cursor: pointer;
   border-radius: 12px; /* Rounded corners */

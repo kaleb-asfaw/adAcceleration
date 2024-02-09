@@ -5,7 +5,6 @@ const checkInterval = 1000; // every 1000ms, a check will occur (this can be mor
 
 function isAdPlaying() {
   return !!document.querySelector('.ytp-ad-preview, .ytp-ad-preview-slot');}
-const L = 3;
 
 function accelerate() {
   const videoElement = document.querySelector('video');

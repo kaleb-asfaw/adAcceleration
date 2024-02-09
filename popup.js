@@ -1,64 +1,79 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const toggleSwitch = document.getElementById("toggleSwitch");
-    const resetButton = document.getElementById("resetButton");
-    const resetDateDisplay = document.getElementById("resetDateDisplay");
+  const toggleSwitch = document.getElementById("toggleSwitch");
+  const resetButton = document.getElementById("resetButton");
+  const displayMessage = document.getElementById("displayMessage");
+  const toggleArrow = document.getElementById("toggleArrow");
+  let currentView = "lifetime"; // Start with "lifetime" view
 
-    resetButton.addEventListener('click', function () {
+  // Hide the reset button initially
+  resetButton.style.display = "none";
+
+  toggleArrow.addEventListener('click', function () {
+      // Toggle the view
+      if (currentView === "lifetime") {
+          currentView = "sinceDate";
+          updateDisplay(); // Update display based on the new view
+          resetButton.style.display = "block"; // Show reset button for "sinceDate" view
+      } else {
+          currentView = "lifetime";
+          updateDisplay(); // Update display based on the new view
+          resetButton.style.display = "none"; // Hide reset button for "lifetime" view
+      }
+  });
+
+  // Update the display based on the current view
+  function updateDisplay() {
+      chrome.storage.local.get(["totalTimeSaved", "timeSavedSinceReset", "lastResetDate"], (result) => {
+          if (currentView === "sinceDate") {
+              const date = new Date(result.lastResetDate).toLocaleDateString();
+              const timeSavedSinceDate = formatTime(result.timeSavedSinceReset);
+              displayMessage.textContent = result.timeSavedSinceReset
+              // if (result.timeSavedSinceReset == 0){
+              //   displayMessage.textContent = timeSavedSinceDate;}
+              // else{
+              // displayMessage.textContent = timeSavedSinceDate + date;}
+
+          } else { // "lifetime" view
+              const totalTimeSaved = formatTime(result.totalTimeSaved);
+              displayMessage.textContent = result.totalTimeSaved
+              // displayMessage.textContent = totalTimeSaved + "installation!";
+          }
+      });
+  }
+
+  function formatTime(timeInSeconds) {
+    // Your existing logic to format the time
+    if (timeInSeconds == 0) {
+        return 'Start watching and save time!';}
+    else if (timeInSeconds < 60) {
+        return 'Less than a minute saved since ';} 
+    else if (timeInSeconds < 120) {
+        return '1 minute saved since ';} 
+    else {
+      return `Over ${Math.floor(timeInSeconds / 60)} minutes saved since `;}}
+
+  // Reset button functionality
+  resetButton.addEventListener('click', function () {
       const newResetDate = new Date().toISOString();
       chrome.storage.local.set({ "timeSavedSinceReset": 0, "lastResetDate": newResetDate }, () => {
           if (chrome.runtime.lastError) {
               console.error('Error updating storage:', chrome.runtime.lastError);
           } else {
-              // Data has been successfully updated, now refresh the UI
-              resetDateDisplay.textContent = `Time Saved Since (${new Date(newResetDate).toLocaleDateString()}): 0 seconds saved`;
-              updateTimeSavedTooltip();
+              // Optionally, update the UI to reflect the reset
+              updateDisplay();
           }
       });
   });
 
-    // Retrieve the ad skipper state from Chrome storage and set the toggle switch accordingly
-    chrome.storage.local.get("adSkipperEnabled", (result) => {
-      const isAdSkipperEnabled = result.adSkipperEnabled !== undefined ? result.adSkipperEnabled : true;
-      toggleSwitch.checked = isAdSkipperEnabled;
-  
-      // Handle toggle switch changes
-      toggleSwitch.addEventListener("change", function () {
-        const isChecked = this.checked;
-        // Update the ad skipper state in Chrome storage
-        chrome.storage.local.set({ "adSkipperEnabled": isChecked });
-      });
-    });
-    
-    function formatTime(timeInSeconds) {
-      if (timeInSeconds < 60) {
-          return 'Less than a minute';
-      } else if (timeInSeconds < 120) {
-          return '1 minute';
-      } else {
-          return `Over ${Math.floor(timeInSeconds / 60)} minutes!`;
-      }
-  }
-    
-    function updateTimeSavedTooltip() {
-      chrome.storage.local.get(["totalTimeSaved", "timeSavedSinceReset", "lastResetDate"], (result) => {
-          const totalTimeSaved = result.totalTimeSaved || 0;
-          const timeSavedSinceReset = result.timeSavedSinceReset || 0;
-          const lastResetDate = new Date(result.lastResetDate || new Date()).toLocaleDateString();
-          // Sending floor of minutes saved
-          let displayMessage;
+  // Toggle switch initialization
+  chrome.storage.local.get("adSkipperEnabled", (result) => {
+      toggleSwitch.checked = result.adSkipperEnabled !== undefined ? result.adSkipperEnabled : true;
+  });
 
-          if (totalTimeSaved < 60) {
-            displayMessage = 'Less than a minute saved';
-          }
-          else if (totalTimeSaved < 120) {
-            displayMessage = 'You have saved 1 minute'
-          }
-          else{
-            displayMessage = `Over ${Math.floor(totalTimeSaved/60)} minutes saved!`;
-          }
-          document.getElementById("displayMessage").textContent = totalTimeSaved
-          resetDateDisplay.textContent = `Time Saved Since(${lastResetDate}): ${timeSavedSinceReset}`;
-      });
-  }
-  updateTimeSavedTooltip(); // Call this function to update the tooltip when the popup is opened
-  });  
+  toggleSwitch.addEventListener("change", function () {
+      chrome.storage.local.set({ "adSkipperEnabled": this.checked });
+  });
+
+  // Call updateDisplay at the end to ensure the popup is initialized with the correct data
+  updateDisplay();
+});
