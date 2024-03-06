@@ -56,12 +56,16 @@ const adSkipChecker = setInterval(() => {
   
       if (skipButton) { 
         skipButton.click();
+        if (!!videoElement.paused){
         chrome.runtime.sendMessage({ action: "updateTimeSaved", timeSaved: 5 });
+        }
         wasAdPlaying = true;
 
       } else if (adCurrentlyPlaying) {
         accelerate();
+        if (!!videoElement.paused){ // version 1.0.3 update: won't add to TimeSaved when ad is paused
         chrome.runtime.sendMessage({ action: "updateTimeSaved", timeSaved: getAdDuration()});
+        }
         wasAdPlaying = true;
 
       } else if (wasAdPlaying && !adCurrentlyPlaying) {
