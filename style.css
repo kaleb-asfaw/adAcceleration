@@ -41,7 +41,7 @@ body { /* Popup styling */
 
 .time-saved-display{ /* Over _ minutes saved! */
   margin-top: 10px;
-  font-size: 9px;
+  font-size: 12px;
   color: rgb(232, 232, 232)
 }
 
