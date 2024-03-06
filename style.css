@@ -41,7 +41,7 @@ body { /* Popup styling */
 
 .time-saved-display{ /* Over _ minutes saved! */
   margin-top: 10px;
-  font-size: 14px;
+  font-size: 9px;
   color: rgb(232, 232, 232)
 }
 
@@ -104,4 +104,30 @@ input:checked + .slider-round:before {
   -webkit-transform: translateX(24px);
   -ms-transform: translateX(24px);
   transform: translateX(24px);
+}
+
+/* Scrolling from lifetime to <from date> statistics */
+.arrow {
+  cursor: pointer;
+  display: inline-block;
+  transform: rotate(-90deg) translateX(.5px)translateY(5px); /* Rotate 90 degrees counterclockwise */
+  font-size: 8px;
+  
+  
+}
+
+/* Reset button styling */
+.reset-button {
+  border: none;
+  color: black;
+  padding: 2px 4px; /* Adjust padding to control the size */
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 8px; /* Adjust font size as needed */
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 12px; /* Rounded corners */
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); /* Optional: Adds a shadow */
+  transition-duration: 0.4s; /* Optional: Adds a transition effect */
 }
