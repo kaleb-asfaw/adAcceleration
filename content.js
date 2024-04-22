@@ -4,7 +4,7 @@ let originalPlaybackRate = 1;
 const checkInterval = 1000; // every 1000ms, a check will occur (this can be more frequent, may cause laggy browser)
 
 function isAdPlaying() {
-  return !!document.querySelector('.ytp-ad-preview, .ytp-ad-preview-slot');}
+  return !!document.querySelector('.ytp-ad-preview, .ytp-ad-preview-slot, .ytp-skip-ad-button');}
 
 function accelerate() {
   const videoElement = document.querySelector('video');
@@ -52,20 +52,16 @@ const adSkipChecker = setInterval(() => {
   // Retrieve the ad skipper state and use it to decide whether to skip ads
   getAdSkipperState((isAdSkipperEnabled) => {
     if (isAdSkipperEnabled) {
-      const skipButton = document.querySelector(".ytp-ad-skip-button, .ytp-ad-overlay-close-button, .ytp-ad-skip-button-slot");
+      const skipButton = document.querySelector(".ytp-ad-skip-button, .ytp-ad-overlay-close-button, .ytp-ad-skip-button-slot, .ytp-skip-ad-button");
   
       if (skipButton) { 
         skipButton.click();
-        if (!!videoElement.paused){
         chrome.runtime.sendMessage({ action: "updateTimeSaved", timeSaved: 5 });
-        }
         wasAdPlaying = true;
 
       } else if (adCurrentlyPlaying) {
         accelerate();
-        if (!!videoElement.paused){ // version 1.0.3 update: won't add to TimeSaved when ad is paused
         chrome.runtime.sendMessage({ action: "updateTimeSaved", timeSaved: getAdDuration()});
-        }
         wasAdPlaying = true;
 
       } else if (wasAdPlaying && !adCurrentlyPlaying) {
