@@ -4,7 +4,7 @@ let originalPlaybackRate = 1;
 const checkInterval = 1000; // every 1000ms, a check will occur (this can be more frequent, may cause laggy browser)
 
 function isAdPlaying() {
-  return !!document.querySelector('.ytp-ad-preview, .ytp-ad-preview-slot, .ytp-skip-ad-button');}
+  return !!document.querySelector('.video-ads ytp-ad-module, .ytp-ad-preview, .ytp-preview-ad, .ytp-ad-preview-slot, .ytp-skip-ad-button');}
 
 function accelerate() {
   const videoElement = document.querySelector('video');
