@@ -1,5 +1,5 @@
 # Overview
-With Neal Mohan's instatement as Youtube's CEO began Google's ad-blocker blocking initiative, preventing all users who utilize an ad blocker from watching videos on YouTube. To counteract this, skipping advertisements via script is the new way to go.  
+With Neal Mohan's instatement as Youtube's CEO began Google's ad-blocker blocking initiative, preventing all users who utilize an ad blocker from watching videos on YouTube. To counteract this, skipping advertisements via script is the new way to go. Download here: https://chromewebstore.google.com/detail/ad-acceleration/akfmkopekongpahghifpahndcngfaebh?hl=en
 
 
 # Features
