@@ -7,6 +7,7 @@ With Neal Mohan's instatement as Youtube's CEO began Google's ad-blocker blockin
 ✓ Mutes and accelerates unskippable ads  
 ✓ Can enable/disable functionality at any time (via extension popup)  
 ✓ Tracks user analytics: user can view number of minutes saved (via extension popup)  
+✓ Blocks popup ads on non-YouTube sites
 ✓ Result: cut ad times by over 95%!
 
 # Feedback
