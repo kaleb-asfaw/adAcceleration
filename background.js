@@ -7,7 +7,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         chrome.storage.local.get("totalTimeSaved", (result) => {
             let totalTimeSaved = result.totalTimeSaved || 0;
             totalTimeSaved += request.timeSaved;
-            chrome.storage.local.set({ "totalTimeSaved": totalTimeSaved });
-        });
-    }
-});
+            const userId = "someUserId";
+            chrome.storage.local.set({ "totalTimeSaved": totalTimeSaved })
+            });
+    }});
