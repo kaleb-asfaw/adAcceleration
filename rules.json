@@ -3,36 +3,54 @@
         "id": 1,
         "priority": 1,
         "action": { "type": "block" },
-        "condition": { "urlFilter": "*://*doubleclick.net/*" }
+        "condition": {
+            "urlFilter": "*://*doubleclick.net/*",
+            "excludedDomains": ["*://*.youtube.com/*", "*://youtube.com/*"]
+        }
     },
     {
         "id": 2,
         "priority": 1,
         "action": { "type": "block" },
-        "condition": { "urlFilter": "*://googleadservices.com/*" }
+        "condition": {
+            "urlFilter": "*://googleadservices.com/*",
+            "excludedDomains": ["*://*.youtube.com/*", "*://youtube.com/*"]
+        }
     },
     {
         "id": 3,
         "priority": 1,
         "action": { "type": "block" },
-        "condition": { "urlFilter": "*://*.zedo.com/*" }
+        "condition": {
+            "urlFilter": "*://*.zedo.com/*",
+            "excludedDomains": ["*://*.youtube.com/*", "*://youtube.com/*"]
+        }
     },
     {
         "id": 4,
         "priority": 1,
         "action": { "type": "block" },
-        "condition": { "urlFilter": "*://ads.pubmatic.com/*" }
+        "condition": {
+            "urlFilter": "*://ads.pubmatic.com/*",
+            "excludedDomains": ["*://*.youtube.com/*", "*://youtube.com/*"]
+        }
     },
     {
         "id": 5,
         "priority": 1,
         "action": { "type": "block" },
-        "condition": { "urlFilter": "*://adnxs.com/*" }
+        "condition": {
+            "urlFilter": "*://adnxs.com/*",
+            "excludedDomains": ["*://*.youtube.com/*", "*://youtube.com/*"]
+        }
     },
     {
         "id": 6,
         "priority": 1,
         "action": { "type": "block" },
-        "condition": { "urlFilter": "*://rubiconproject.com/*" }
+        "condition": {
+            "urlFilter": "*://rubiconproject.com/*",
+            "excludedDomains": ["*://*.youtube.com/*", "*://youtube.com/*"]
+        }
     }
 ]
